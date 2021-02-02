@@ -40,8 +40,10 @@ class ExampleController implements SSEControllerInterface{
             case 3:
                 $this->events->merge(
                     new Events(
-                        new Event("message", Array("text" => "Parrots are the coolest animals!")),
-                        new Event("message", Array("text" => "I want to get one as a pet, do you know where i could get one?"))
+                        Array(
+                            new Event("message", Array("text" => "Parrots are the coolest animals!")),
+                            new Event("message", Array("text" => "I want to get one as a pet, do you know where i could get one?"))
+                        )
                     )
                 );
                 break;
