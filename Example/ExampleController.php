@@ -21,7 +21,7 @@ class ExampleController implements SSEControllerInterface{
      * This is where you should implement main logic for detecting new events
      * and populate $this->events with them using $this->events->push().
      */
-    public function cycle(): Void{
+    public function cycle(Int $currentCycle): Void{
 
         //We will randomly send a message
         $random = rand(0, 10);

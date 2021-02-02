@@ -61,10 +61,10 @@
             var latency =       Date.now() - serverTime;
             var pingClass =     "dot";
 
-            if(latency >= 50){
-                pingClass += "  mediocre";
-            }else if(latency >= 100){
+            if(latency >= 100){
                 pingClass += "  bad";
+            }else if(latency >= 50){
+                pingClass += "  mediocre";
             }
 
             ping.innerHTML =    "<span class='" + pingClass + "'></span>" + latency + "ms";

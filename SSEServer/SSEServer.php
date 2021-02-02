@@ -102,7 +102,7 @@ class SSEServer {
         try{
 
             //Execute the cycle function of the controller
-            $this->controller->cycle();
+            $this->controller->cycle($this->currentCycle);
 
             //Get the current events from the controller
             $events = $this->controller->getEvents();

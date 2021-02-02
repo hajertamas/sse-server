@@ -2,7 +2,7 @@
 namespace SSEServer;
 
 interface SSEControllerInterface{
-    public function cycle(): Void;
+    public function cycle(Int $currentCycle): Void;
     public function cleanUp(): Void;
     public function getEvents(): Events;
 }
