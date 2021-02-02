@@ -53,6 +53,15 @@ class ExampleController implements SSEControllerInterface{
             case 5:
                 $this->events->push(new Event("alert", Array("text" => "You have a scheduled meeting in 5 minutes, you are already too late.")));
         }
+
+        /**
+         * We can use the $currentCycle argument to balance workload,
+         * or to execute low-priority actions every X cycle, or to
+         * only make costly actions every X cycle
+         */
+        if($currentCycle % 3 == 0){
+            $this->events->push(new Event("debug", Array("info" => "I am sent every 3 cycles")));
+        }
     }
 
     /**
