@@ -1,6 +1,6 @@
 {
     "name": "htrnf/sse-server",
-    "description": "A PHP solution for webRTC via Server Sent Events (If you are looking for an alternative for Websockets for shared hosting).",
+    "description": "A small PHP library for webRTC via Server Sent Events. A nice alternative to Websockets for shared hosting.",
     "type": "library",
     "license": "MIT",
     "authors": [
