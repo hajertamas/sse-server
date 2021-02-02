@@ -35,7 +35,7 @@ class ExampleController implements SSEControllerInterface{
      * This is where you should implement main logic for detecting new events
      * and populate $this->events with them using $this->events->push().
      */
-    public function cycle(): Void{
+    public function cycle(Int $currentCycle): Void{
 
         //We will randomly send a message
         $random = rand(0, 10);
@@ -52,13 +52,29 @@ class ExampleController implements SSEControllerInterface{
                 $this->events->push(new Event("message", Array("text" => "Do you like banana pancakes?")));
                 break;
             case 3:
-                $this->events->push(new Event("message", Array("text" => "Parrots are the coolest animals!")));
+                $this->events->merge(
+                    new Events(
+                        Array(
+                            new Event("message", Array("text" => "Parrots are the coolest animals!")),
+                            new Event("message", Array("text" => "I want to get one as a pet, do you know where i could get one?"))
+                        )
+                    )
+                );
                 break;
             case 4:
                 $this->events->push(new Event("message", Array("text" => "Please go to the grocery store and get some bread.")));
                 break;
             case 5:
                 $this->events->push(new Event("alert", Array("text" => "You have a scheduled meeting in 5 minutes, you are already too late.")));
+        }
+
+        /**
+         * We can use the $currentCycle argument to balance workload,
+         * or to execute low-priority actions every X cycle, or to
+         * only make costly actions every X cycle
+         */
+        if($currentCycle % 3 == 0){
+            $this->events->push(new Event("debug", Array("info" => "I am sent every 3 cycles")));
         }
     }
 
