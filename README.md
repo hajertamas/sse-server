@@ -95,6 +95,7 @@ class ExampleController implements SSEControllerInterface{
     public function cleanUp(): Void{
 
     }
+}
 
     //Create a new instance of our custom SSEControllerInterface object
     $controller = new ExampleController();
