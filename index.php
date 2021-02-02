@@ -4,8 +4,12 @@ require __DIR__."/vendor/autoload.php";
 use SSEServer\SSEServer;
 use Example\ExampleController;
 
-$sseController = new ExampleController("asd");
-$server = new SSEServer($sseController, true);
+//Create a new instance of our custom SSEControllerInterface object
+$controller = new ExampleController();
+
+//Create a new SSEServer instance, pass the controller object as the first arg
+//Second arg is degubmode, if set to true, the server will send events with type "debug" if there are any.
+$server = new SSEServer($controller, true);
 
 //Every $cycleTime seconds the server will do a cycle (default is 1 seconds)
 $cycleTime = 3;

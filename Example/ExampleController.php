@@ -47,13 +47,20 @@ class ExampleController implements SSEControllerInterface{
     }
 
     /**
-     * This function will be called each cycle
+     * This function will be called each cycle after $this->cycle()
+     * This function must return a SSEServer\Events object containing all events (SSEServer\Event) which
+     * should be sent as output in the current cycle.
      */
-    public function cleanUp(): Void{
-        $this->events = new Events;
-    }
-
     public function getEvents(): Events{
         return $this->events->flush();
+    }
+
+    /**
+     * This function will be called each cycle after $this->getEvents()
+     * Cleanup logic should be implemented here, e.g. unset variables stored
+     * in this object which won't be needed at next cycle. In this case we left it blank
+     */
+    public function cleanUp(): Void{
+
     }
 }

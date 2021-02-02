@@ -20,7 +20,7 @@ class Events{
                 }catch(\Throwable $e){
                     $debugEvent = new Event("debug", 
                         Array(
-                            "error" => $e
+                            "error" => $e->getMessage()
                         )
                     );
                     array_push($this->events, $debugEvent);
@@ -32,11 +32,13 @@ class Events{
     public function push(EventInterface $event): Void{
         array_push($this->events, $event);
     }
+
     public function flush(): Events{
         $self = clone $this;
         $this->events = [];
         return $self;
     }
+    
     public function getEvents(): Array{
         return $this->events;
     }
