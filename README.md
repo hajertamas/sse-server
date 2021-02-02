@@ -1,7 +1,7 @@
 # SSEServer
 
-A PHP solution for webRTC via Server Sent Events\n
-A nice alternative to Websockets for shared hosting.
+A small PHP library for webRTC via Server Sent Events. A nice alternative to Websockets for shared hosting. 
+Build your own controller via a single simple interface & its ready to go.
 
 ---
 
