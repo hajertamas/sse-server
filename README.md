@@ -6,7 +6,7 @@ A nice alternative to Websockets for shared hosting.
 ---
 
 ### Quick example
-
+##### PHP
 ```php
 <?php
 
@@ -93,7 +93,7 @@ class ExampleController implements SSEControllerInterface{
     //Run the server (loop)
     $server->run();
 ```
-
+##### Javascript
 ```javascript
     //Create EventSource pointing to the url of our php file
     const evtSource = new EventSource("events.php");
