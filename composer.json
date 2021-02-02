@@ -10,7 +10,9 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {},
+    "require": {
+      "php": ">=7.4.5"
+    },
     "autoload": {
         "classmap": [
           "SSEServer/SSEServer.php",
