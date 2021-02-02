@@ -1,0 +1,24 @@
+{
+    "name": "htrnf/sse-server",
+    "description": "A PHP solution for webRTC via Server Sent Events (If you are looking for an alternative for Websockets for shared hosting).",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "hajertamas",
+            "email": "76472742+hajertamas@users.noreply.github.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload": {
+        "classmap": [
+          "SSEServer/SSEServer.php",
+          "SSEServer/Events.php",
+          "SSEServer/Event.php",
+          "SSEServer/EventInterface.php",
+          "SSEServer/SSEControllerInterface.php",
+          "Example/ExampleController.php"
+        ]
+      }
+}
