@@ -19,6 +19,10 @@
           padding: 15px 20px;
           border-bottom: 1px solid #00000022;
       }
+      .messages .message.alert{
+          color: red;
+          font-weight: 900;
+      }
       .ping{
           position: fixed;
           top: 10px;
@@ -62,13 +66,19 @@
             }else if(latency >= 100){
                 pingClass += "  bad";
             }
-            
+
             ping.innerHTML =    "<span class='" + pingClass + "'></span>" + latency + "ms";
         });
 
         evtSource.addEventListener("message", function(event) {
             const data = JSON.parse(event.data);
             var message = "<div class='message'><span style='font-weight: 700;'>Message: </span>" + data.text + "</div>"
+            messagesContainer.innerHTML += message;
+        });
+
+        evtSource.addEventListener("alert", function(event) {
+            const data = JSON.parse(event.data);
+            var message = "<div class='message alert'><span style='font-weight: 700;'>Alert: </span>" + data.text + "</div>"
             messagesContainer.innerHTML += message;
         });
 

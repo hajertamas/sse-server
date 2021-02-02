@@ -43,6 +43,8 @@ class ExampleController implements SSEControllerInterface{
             case 4:
                 $this->events->push(new Event("message", Array("text" => "Please go to the grocery store and get some bread.")));
                 break;
+            case 5:
+                $this->events->push(new Event("alert", Array("text" => "You have a scheduled meeting in 5 minutes, you are already too late.")));
         }
     }
 
@@ -58,7 +60,7 @@ class ExampleController implements SSEControllerInterface{
     /**
      * This function will be called each cycle after $this->getEvents()
      * Cleanup logic should be implemented here, e.g. unset variables stored
-     * in this object which won't be needed at next cycle. In this case we left it blank
+     * in this object which won't be needed at next cycle. In this case we left it blank.
      */
     public function cleanUp(): Void{
 
