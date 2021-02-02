@@ -5,6 +5,10 @@ Build your own controller via a single simple interface & its ready to go.
 
 ---
 
+### Installation
+    $ composer require htrnf/sse-server
+---
+
 ### Quick example
 ##### PHP
 events.php:
