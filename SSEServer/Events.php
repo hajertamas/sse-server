@@ -61,8 +61,8 @@ class Events{
      * Merges two Events objects
      * @param Events $events Object to be merged with current data
      */
-    public function merge(Events $events){
-        foreach($events as $event){
+    public function merge(Events $events): Void{
+        foreach($events->getEvents() as $event){
             array_push($this->events, $event);
         }
     }

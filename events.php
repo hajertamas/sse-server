@@ -12,7 +12,7 @@ $controller = new ExampleController();
 $server = new SSEServer($controller, true);
 
 //Every $cycleTime seconds the server will do a cycle (default is 1 seconds)
-$cycleTime = 2;
+$cycleTime = 0.5;
 $server->setCycleTime($cycleTime);
 
 //In every $pingInterval (2nd) cycle a ping event will be sent containing current time (milliseconds since epoch as int) (default is every cycle (1))
