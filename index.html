@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Server Sent Events example</title>
+  <meta name="description" content="An example front end implementation of https://github.com/hajertamas/sse-server">
+  <meta name="author" content="Tamás Hájer">
+  <style>
+      body{
+          font-family: system-ui, arial, sans-serif;
+      }
+      .messages{
+        width: 420px;
+        margin: auto;
+      }
+      .messages .message{
+          padding: 15px 20px;
+          border-bottom: 1px solid #00000022;
+      }
+      .ping{
+          position: fixed;
+          top: 10px;
+          right: 10px;
+      }
+      .ping .dot{
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: green;
+        margin-right: 4px;
+      }
+      .ping .dot.mediocre{
+        background-color: orange;
+      }
+      .ping .dot.bad{
+        background-color: red;
+      }
+  </style>
+</head>
+
+<body>
+    <div class="ping"></div>
+    <div class="messages"></div>
+
+  <script>
+        const ping = document.querySelector(".ping");
+        const messagesContainer = document.querySelector(".messages");
+
+        const evtSource = new EventSource("events.php");
+
+        evtSource.addEventListener("ping", function(event) {
+
+            const serverTime =  JSON.parse(event.data).t;
+            var latency =       Date.now() - serverTime;
+            var pingClass =     "dot";
+
+            if(latency >= 50){
+                pingClass += "  mediocre";
+            }else if(latency >= 100){
+                pingClass += "  bad";
+            }
+            
+            ping.innerHTML =    "<span class='" + pingClass + "'></span>" + latency + "ms";
+        });
+
+        evtSource.addEventListener("message", function(event) {
+            const data = JSON.parse(event.data);
+            var message = "<div class='message'><span style='font-weight: 700;'>Message: </span>" + data.text + "</div>"
+            messagesContainer.innerHTML += message;
+        });
+
+  </script>
+</body>
+</html>
