@@ -49,7 +49,7 @@ class SSEServer {
      * Cycle counter
      * @var Int
      */
-    private $currentCycle =     0;
+    private $currentCycle =     1;
 
     /**
      * @param SSEControllerInterface $controller The controller object which should detect & store new events & pass them to this object.
