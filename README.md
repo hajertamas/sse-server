@@ -7,6 +7,7 @@ A nice alternative to Websockets for shared hosting.
 
 ### Quick example
 ##### PHP
+events.php:
 ```php
 <?php
 
