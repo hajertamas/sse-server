@@ -38,7 +38,12 @@ class ExampleController implements SSEControllerInterface{
                 $this->events->push(new Event("message", Array("text" => "Do you like banana pancakes?")));
                 break;
             case 3:
-                $this->events->push(new Event("message", Array("text" => "Parrots are the coolest animals!")));
+                $this->events->merge(
+                    new Events(
+                        new Event("message", Array("text" => "Parrots are the coolest animals!")),
+                        new Event("message", Array("text" => "I want to get one as a pet, do you know where i could get one?"))
+                    )
+                );
                 break;
             case 4:
                 $this->events->push(new Event("message", Array("text" => "Please go to the grocery store and get some bread.")));

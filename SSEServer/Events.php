@@ -58,6 +58,16 @@ class Events{
     }
 
     /**
+     * Merges two Events objects
+     * @param Events $events Object to be merged with current data
+     */
+    public function merge(Events $events){
+        foreach($events as $event){
+            array_push($this->events, $event);
+        }
+    }
+
+    /**
      * Returns a clone of this object & erases all stored events
      * @return Events
      */
