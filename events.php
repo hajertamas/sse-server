@@ -17,6 +17,7 @@ $server->setCycleTime($cycleTime);
 
 //In every $pingInterval (2nd) cycle a ping event will be sent containing current time (milliseconds since epoch as int) (default is every cycle (1))
 $server->setPingInterval(40);
+$server->setSendPings(false);
 
 //Run the server (loop)
 $server->run();

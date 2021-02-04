@@ -24,7 +24,7 @@ class ExampleController implements SSEControllerInterface{
     public function cycle(Int $currentCycle): Void{
 
         //We will randomly send a message
-        $random = rand(0, 1000);
+        $random = rand(0, 600);
 
         switch($random){
             case 0:
