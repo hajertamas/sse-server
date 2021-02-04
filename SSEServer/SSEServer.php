@@ -98,14 +98,14 @@ class SSEServer {
 
         //Set as false for checking
         $debugEvent = false;
-
+        $events = new Events;
         try{
 
             //Execute the cycle function of the controller
             $this->controller->cycle($this->currentCycle);
 
             //Get the current events from the controller
-            $events = $this->controller->getEvents();
+            $events->merge($this->controller->getEvents());
 
             //Tell the controller it can clean up itself
             $this->controller->cleanUp();
@@ -143,10 +143,10 @@ class SSEServer {
 
             //Send the pign event
             $pingEvent->send();
-
         }
 
         //Iterate through the events in the Events object
+
         foreach($events->getEvents() as $event){
 
             //Check if message type is debug and if debug mode is on
