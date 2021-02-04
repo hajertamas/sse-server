@@ -12,9 +12,9 @@ class Event implements \SSEServer\EventInterface{
 
     /**
      * @param String $eventType The type of the event. This can be anything.
-     * @param Array $data Array of data to be sent as JSON output.
+     * @param $data Array of data to be sent as JSON output.
      */
-    function __construct(String $eventType, Array $data){
+    function __construct(String $eventType, $data){
         $this->type = $eventType;
         $this->data = $data;
     }

@@ -40,6 +40,11 @@ class SSEServer {
     private $pingInterval =     1;
 
     /**
+     * Sets wheter the server should send ping events or not
+     * @var Bool
+     */
+    private $sendPings =        true;
+    /**
      * Sets the interval between cycles in microseconds
      * @var Float
      */
@@ -76,7 +81,7 @@ class SSEServer {
                 $this->cycle();
             }catch(\Throwable $e){ 
                 $debugEvent = new Event("debug", Array("error" => $e));
-                $this->sendEvents(new Events($debugEvent));
+                $this->sendEvents(new Events(Array($debugEvent)));
             }
             
             $this->endCycle();
@@ -136,10 +141,10 @@ class SSEServer {
     private function sendEvents(Events $events): Void{
 
         //Check if we should send a ping event in the current cycle
-        if ($this->currentCycle % $this->pingInterval == 0 ){
+        if ($this->sendPings && $this->currentCycle % $this->pingInterval == 0 ){
 
             //Construct the ping Event
-            $pingEvent = new Event("ping", Array("t" => round(microtime(true) * 1000)));
+            $pingEvent = new Event("ping", round(microtime(true) * 1000));
 
             //Send the pign event
             $pingEvent->send();
@@ -181,6 +186,14 @@ class SSEServer {
      */
     public function setPingInterval(Int $interval){
         $this->pingInterval = $interval;
+    }
+
+    /**
+     * Sets wheter the server should send "ping" events
+     * @param Bool $send Switch
+     */
+    public function setSendPings(Bool $sendPings){
+        $this->sendPings = $sendPings;
     }
 
     /**
