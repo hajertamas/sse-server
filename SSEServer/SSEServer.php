@@ -129,9 +129,7 @@ class SSEServer {
                 $events->push($debugEvent);
             }
         }
-        if($this->currentCycle % 100 == 0){
-        $events->push(new Event("debug", $this->getServerLoad()));
-        }
+
         //Send all events
         $this->sendEvents($events);
     }
