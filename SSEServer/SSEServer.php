@@ -67,7 +67,7 @@ class SSEServer {
         header('Cache-Control: no-store, no-cache, must-revalidate');
         header('Cache-Control: post-check=0, pre-check=0', FALSE);
         header('Pragma: no-cache');
-        ignore_user_abort(1);
+        ignore_user_abort(true);
         set_time_limit(0);
     }
 
@@ -89,10 +89,10 @@ class SSEServer {
             
             $this->endCycle();
             if(connection_aborted() === 1){
-                $this->disconnect();
                 break;
             }
         }
+        $this->disconnect();
     }
 
     /**
