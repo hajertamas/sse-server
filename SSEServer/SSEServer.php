@@ -64,7 +64,9 @@ class SSEServer {
         $this->controller = $controller;
         $this->debug = $debug;
         header('Content-Type: text/event-stream');
-        header('Cache-Control: no-cache');
+        header('Cache-Control: no-store, no-cache, must-revalidate');
+        header('Cache-Control: post-check=0, pre-check=0', FALSE);
+        header('Pragma: no-cache');
         set_time_limit(0);
     }
 
