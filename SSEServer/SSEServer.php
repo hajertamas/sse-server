@@ -81,6 +81,7 @@ class SSEServer {
         while (true) {
 
             if(connection_aborted() == 1){
+                $this->disconnect();
                 break;
             }
 
@@ -94,7 +95,6 @@ class SSEServer {
             $this->endCycle();
         }
 
-        $this->disconnect();
         exit;
     }
 
@@ -115,8 +115,8 @@ class SSEServer {
 
             //Send connection confirmed event at first cycle, or disconnect just does not work.
             if($this->currentCycle === 1){
-                $connected = new Event("connection", "connected");
-                $connected->send();
+                $connection = new Event("connection", "connected");
+                $connection->send();
             }
             //Execute the cycle function of the controller
             $this->controller->cycle($this->currentCycle);
@@ -195,6 +195,9 @@ class SSEServer {
     private function disconnect(): Void{
         $this->controller->cleanUp();
         $this->controller->disconnect();
+        @ob_end_flush();
+        @flush();
+        exit;
     }
 
     /**
