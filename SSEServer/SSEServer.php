@@ -86,6 +86,7 @@ class SSEServer {
             
             $this->endCycle();
             if(connection_aborted()){
+                $this->disconnect();
                 break;
             }
         }
@@ -178,6 +179,10 @@ class SSEServer {
 
         //Wait until the next cycle should be executed
         usleep($this->cycleTime);
+    }
+
+    private function disconnect(): Void{
+        $this->controller->disconnect();
     }
 
     /**
