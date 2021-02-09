@@ -65,7 +65,6 @@ class SSEServer {
         $this->debug = $debug;
         header('Content-Type: text/event-stream');
         header('Cache-Control: no-store, no-cache, must-revalidate');
-        header('Cache-Control: post-check=0, pre-check=0', FALSE);
         header('Pragma: no-cache');
         ignore_user_abort(true);
         set_time_limit(0);
@@ -80,6 +79,9 @@ class SSEServer {
     public function run(){
 
         while (true) {
+
+            if(connection_status() === 1 ){ break; }
+
             try{
                 $this->cycle();
             }catch(\Throwable $e){ 
@@ -88,11 +90,10 @@ class SSEServer {
             }
             
             $this->endCycle();
-            if(connection_aborted() === 1){
-                break;
-            }
         }
+
         $this->disconnect();
+        exit;
     }
 
     /**
@@ -110,6 +111,11 @@ class SSEServer {
         $events = new Events;
         try{
 
+            //Send connection confirmed event at first cycle, or disconnect just does not work.
+            if($this->currentCycle === 1){
+                $connected = new Event("connection", "connected");
+                $connected->send();
+            }
             //Execute the cycle function of the controller
             $this->controller->cycle($this->currentCycle);
 
@@ -145,7 +151,7 @@ class SSEServer {
     private function sendEvents(Events $events): Void{
 
         //Check if we should send a ping event in the current cycle
-        if ($this->sendPings && $this->currentCycle % $this->pingInterval == 0 ){
+        if ($this->sendPings && $this->currentCycle % $this->pingInterval == 0){
 
             //Construct the ping Event
             $pingEvent = new Event("ping", round(microtime(true) * 1000));
@@ -185,8 +191,8 @@ class SSEServer {
     }
 
     private function disconnect(): Void{
+        $this->controller->cleanUp();
         $this->controller->disconnect();
-        die;
     }
 
     /**
