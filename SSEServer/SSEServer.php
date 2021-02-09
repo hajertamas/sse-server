@@ -186,6 +186,7 @@ class SSEServer {
 
     private function disconnect(): Void{
         $this->controller->disconnect();
+        die;
     }
 
     /**
