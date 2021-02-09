@@ -88,7 +88,7 @@ class SSEServer {
             }
             
             $this->endCycle();
-            if(connection_aborted()){
+            if(connection_aborted() === 1){
                 $this->disconnect();
                 break;
             }
