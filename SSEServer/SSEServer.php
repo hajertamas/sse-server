@@ -80,7 +80,9 @@ class SSEServer {
 
         while (true) {
 
-            if(connection_status() === 1 ){ break; }
+            if(connection_aborted() == 1){
+                break;
+            }
 
             try{
                 $this->cycle();
